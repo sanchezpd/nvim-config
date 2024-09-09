@@ -102,20 +102,13 @@ return {
                     'jsonls',
                     'lua_ls',
                     'pylsp',
-                    -- 'ts_ls',
-                    'tsserver',
+                    'ts_ls',
                 },
                 handlers = {
                     -- this first functions is the default handler'
                     -- it applies to every language server without a "custom handler"
                     function(server_name)
-                        -- https://github.com/neovim/nvim-lspconfig/pull/3232
-                        if server_name == 'tsserver' then
-                            server_name = 'ts_ls'
-                        end
-
                         require('lspconfig')[server_name].setup({})
-
                     end,
 
                     -- pylsp config
