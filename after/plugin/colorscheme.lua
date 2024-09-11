@@ -1,7 +1,7 @@
-require("everforest").setup({
-    background = "hard",
-    transparent_background_level = 1,
-})
+-- require("everforest").setup({
+--     background = "hard",
+--     transparent_background_level = 1,
+-- })
 
 require("catppuccin").setup({
     flavour = "macchiato",
