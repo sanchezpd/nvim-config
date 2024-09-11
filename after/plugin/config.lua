@@ -148,6 +148,12 @@ vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
 require('telescope').load_extension('undo')
 vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>')
 
+require('telescope').setup{
+    defaults = {
+        path_display = "truncate",
+    }
+}
+
 
 
 ----------------------------------------------------------------------------------------
