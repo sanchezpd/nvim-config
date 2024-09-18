@@ -12,7 +12,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = "C:/Users/Daniel/.nvim/undodir"
+vim.opt.undodir = { vim.fn.expand("~") .. "/.nvim/undodir//" }
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
