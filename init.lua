@@ -1,4 +1,4 @@
 require("config.set")
 require("config.lazy")
 
-vim.cmd.colorscheme "vscode"
+vim.cmd.colorscheme "catppuccin"
