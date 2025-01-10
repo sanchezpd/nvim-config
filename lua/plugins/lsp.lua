@@ -129,7 +129,23 @@ return {
                     -- pylsp config
                     pylsp = function()
                         require('lspconfig').pylsp.setup({
-                            settings = { pylsp = { plugins = { pycodestyle = { ignore = 'E501', maxLineLength = 88, } } } } })
+                            settings = {
+                                pylsp = {
+                                    plugins = {
+                                        mccabe = {
+                                            threshold = nil
+                                        },
+                                        pycodestyle = {
+                                            ignore = {
+                                                'C0103', 'E124', 'E125', 'E226', 'E231', 'E501', 'W391', 'W293', 'W503', 'W504'
+                                            },
+                                            maxLineLength = 88,
+                                            complexity = 30,
+                                        }
+                                    }
+                                }
+                            }
+                        })
                     end,
 
                     -- lua_ls config
