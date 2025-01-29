@@ -1,6 +1,6 @@
 return {
     { 'airblade/vim-gitgutter' },
-    { 'RRethy/vim-hexokinase', build = "make hexokinase" },
+    -- { 'RRethy/vim-hexokinase', build = "make hexokinase" },
     {
         'altermo/ultimate-autopair.nvim',
         event = { 'InsertEnter', 'CmdlineEnter' },
