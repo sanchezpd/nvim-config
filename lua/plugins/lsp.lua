@@ -108,7 +108,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    'angularls',
+                    -- 'angularls',
                     'clangd',
                     'csharp_ls',
                     'cssls',
