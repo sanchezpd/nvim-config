@@ -22,15 +22,24 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            { 'L3MON4D3/LuaSnip' },
+            {
+                'L3MON4D3/LuaSnip',
+                dependencies = {
+                    'saadparwaiz1/cmp_luasnip',
+                    'rafamadriz/friendly-snippets',
+                }
+            },
         },
         config = function()
             local cmp = require('cmp')
 
             cmp.setup({
-                sources = {
+                sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
-                },
+                    { name = 'luasnip' },
+                }, {
+                    { name = 'buffer' },
+                }),
                 mapping = {
                     ['<C-y>'] = cmp.mapping.confirm({ select = false }),
                     ['<C-e>'] = cmp.mapping.abort(),
@@ -137,7 +146,16 @@ return {
                                         },
                                         pycodestyle = {
                                             ignore = {
-                                                'C0103', 'E124', 'E125', 'E226', 'E231', 'E501', 'W391', 'W293', 'W503', 'W504'
+                                                'C0103',
+                                                'E124',
+                                                'E125',
+                                                'E226',
+                                                'E231',
+                                                'E501',
+                                                'W391',
+                                                'W293',
+                                                'W503',
+                                                'W504',
                                             },
                                             maxLineLength = 88,
                                             complexity = 30,
