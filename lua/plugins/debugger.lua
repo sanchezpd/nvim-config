@@ -6,6 +6,12 @@ return {
             'rcarriga/nvim-dap-ui',
             'mfussenegger/nvim-dap-python',
             'theHamsta/nvim-dap-virtual-text',
+            {
+                'jay-babu/mason-nvim-dap.nvim',
+                dependencies = {
+                    'williamboman/mason.nvim',
+                }
+            },
         },
     },
     config = function()
@@ -13,11 +19,25 @@ return {
         local dapui = require('dapui')
         local dap_python = require('dap-python')
         local dap_virtual_text = require('nvim-dap-virtual-text')
+        local mason = require('mason-nvim-dap')
+
+        -- Set path for debugger according to OS
+        local debugpy_path = vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/'
+        if package.config:sub(1,1) == '\\' then
+            -- Windows
+            debugpy_path = debugpy_path .. 'Scripts/python'
+        else
+            -- Unix
+            debugpy_path = debugpy_path .. 'bin/python3'
+        end
+        dap_python.setup(debugpy_path)
 
         dapui.setup()
-        dap_python.setup(vim.fn.expand("~") .. "/.virtualenvs/debugypy/Scripts/python")
         dap_virtual_text.setup({
             commented = true,
+        })
+        mason.setup({
+            ensure_installed = { 'python' }
         })
 
         vim.fn.sign_define('DapBreakpoint', {
