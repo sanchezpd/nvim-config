@@ -9,5 +9,10 @@ return {
             --Config goes here
         },
     },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        opts = {},
+    },
     -- { 'ThePrimeagen/vim-be-good' },
 }

@@ -14,12 +14,26 @@ return {
     {
         'williamboman/mason.nvim',
         lazy = false,
-        config = true,
-        opts = {
-            ui = {
-                border = 'rounded',
-            },
-        },
+        config = function()
+            require('mason').setup({
+                ui = {
+                    border = 'rounded'
+                },
+            })
+
+            local mason_registry = require('mason-registry')
+            local ensure_installed = {
+                'black',
+                'mypy',
+            }
+
+            for _, tool in ipairs(ensure_installed) do
+                local package = mason_registry.get_package(tool)
+                if not package:is_installed() then
+                    package:install()
+                end
+            end
+        end,
     },
 
     -- Autocompletion
@@ -112,9 +126,9 @@ return {
 
             local lsp_zero = require('lsp-zero')
 
-            -- lsp_attach is where you enable features taht only work
+            -- lsp_attach is where you enable features that only work
             -- if there is a language server active in the file
-            local lsp_attach = function(client, bufnr)
+            local lsp_attach = function(_, bufnr)
                 local opts = { buffer = bufnr }
 
                 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
@@ -145,7 +159,8 @@ return {
                     'html',
                     'jsonls',
                     'lua_ls',
-                    'pylsp',
+                    'ruff',
+                    'pyright',
                     'ts_ls',
                 },
                 handlers = {
@@ -155,36 +170,30 @@ return {
                         require('lspconfig')[server_name].setup({})
                     end,
 
-                    -- pylsp config
-                    pylsp = function()
-                        require('lspconfig').pylsp.setup({
-                            settings = {
-                                pylsp = {
-                                    plugins = {
-                                        mccabe = {
-                                            threshold = nil
-                                        },
-                                        pycodestyle = {
-                                            ignore = {
-                                                'C0103',
-                                                'E124',
-                                                'E125',
-                                                'E226',
-                                                'E231',
-                                                'E501',
-                                                'W391',
-                                                'W293',
-                                                'W503',
-                                                'W504',
-                                            },
-                                            maxLineLength = 88,
-                                            complexity = 30,
-                                        }
-                                    }
-                                }
-                            }
-                        })
+                    -- pyright config
+                    pyright = function()
+                        require('lspconfig').pyright.setup({})
                     end,
+
+                    -- -- pylsp config
+                    -- pylsp = function()
+                    --     require('lspconfig').pylsp.setup({
+                    --         settings = {
+                    --             pylsp = {
+                    --                 plugins = {
+                    --                     mccabe = {
+                    --                         threshold = nil
+                    --                     },
+                    --                     pycodestyle = {
+                    --                         ignore = {'C0103', 'E124', 'E125', 'E226', 'E231', 'E501', 'W391', 'W293', 'W503', 'W504'},
+                    --                         maxLineLength = 88,
+                    --                         complexity = 30,
+                    --                     }
+                    --                 }
+                    --             }
+                    --         }
+                    --     })
+                    -- end,
 
                     -- lua_ls config
                     lua_ls = function()
@@ -194,5 +203,39 @@ return {
                 }
             })
         end
-    }
+    },
+
+    -- Python Linter
+    {
+        'nvimtools/none-ls.nvim',
+        ft = { 'python' },
+        opts = function()
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+            local null_ls = require('null-ls')
+
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.diagnostics.mypy.with({
+                        extra_args = { '--ignore-missing-imports' },
+                    }),
+                },
+                on_attach = function(client, bufnr)
+                    if client.supports_method("textDocument/formatting") then
+                        vim.api.nvim_clear_autocmds({
+                            group = augroup,
+                            buffer = bufnr,
+                        })
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            group = augroup,
+                            buffer = bufnr,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end,
+                        })
+                    end
+                end,
+            })
+        end,
+    },
 }
