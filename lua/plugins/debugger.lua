@@ -47,6 +47,13 @@ return {
             numhl = '',
         })
 
+        vim.fn.sign_define('DapStopped', {
+            text = '󰁕',
+            texthl = 'String',
+            linehl = '',
+            numhl = '',
+        })
+
         -- -- Eval var under cursor
         -- vim.keymap.set("n", "<leader>?", function()
         --     require("dapui").eval(nil, { enter = true })
