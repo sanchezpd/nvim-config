@@ -15,6 +15,11 @@ return {
         'williamboman/mason.nvim',
         lazy = false,
         config = true,
+        opts = {
+            ui = {
+                border = 'rounded',
+            },
+        },
     },
 
     -- Autocompletion
@@ -75,6 +80,17 @@ return {
                         -- vim.snippet.expand(args.body)
                     end,
                 },
+                window = {
+                    completion = {
+                        border = 'rounded',
+                        scrollbar = '║',
+
+                    },
+                    documentation = {
+                        border = 'rounded',
+                        scrollbar = '║',
+                    },
+                },
             })
         end
     },
@@ -90,6 +106,10 @@ return {
             { 'williamboman/mason-lspconfig.nvim' },
         },
         config = function()
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                border = 'rounded',
+            })
+
             local lsp_zero = require('lsp-zero')
 
             -- lsp_attach is where you enable features taht only work

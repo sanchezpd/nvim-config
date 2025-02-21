@@ -21,6 +21,8 @@ return {
             transparent_background = true,
             integrations = {
                 cmp = true,
+                dap = true,
+                dap_ui = true,
                 gitgutter = true,
                 harpoon = true,
                 mason = true,
