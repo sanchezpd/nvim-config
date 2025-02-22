@@ -29,6 +29,7 @@ vim.opt.scrolloff = 10
 -- vim.opt.sidescrolloff = 48
 vim.opt.signcolumn = "yes"
 -- vim.opt.isfname:append("@-@")
+vim.opt.cmdheight = 0
 
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "89"
