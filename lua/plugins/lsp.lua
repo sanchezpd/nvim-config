@@ -208,6 +208,7 @@ return {
     -- Python Linter
     {
         'nvimtools/none-ls.nvim',
+        lazy = true,
         ft = { 'python' },
         opts = function()
             local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

@@ -1,6 +1,7 @@
 return {
     {
         'windwp/nvim-ts-autotag',
+        ft = { 'typescript' },
         opts = {
             opts = {
                 -- Defaults

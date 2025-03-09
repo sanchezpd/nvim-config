@@ -1,5 +1,8 @@
 return {
-    { 'airblade/vim-gitgutter' },
+    {
+        'airblade/vim-gitgutter',
+        event = { 'BufReadPre', 'BufNewFile' },
+    },
     -- { 'RRethy/vim-hexokinase', build = "make hexokinase" },
     {
         'altermo/ultimate-autopair.nvim',
@@ -11,6 +14,7 @@ return {
     },
     {
         'lukas-reineke/indent-blankline.nvim',
+        event = { 'BufReadPre', 'BufNewFile' },
         main = 'ibl',
         opts = {},
     },
