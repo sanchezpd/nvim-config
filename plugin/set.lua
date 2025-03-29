@@ -13,6 +13,7 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = { vim.fn.stdpath('data') .. '/undodir/' }
+vim.g.null_ls_temp_dir = vim.fn.stdpath('cache') .. 'null-ls'
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
