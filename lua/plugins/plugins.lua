@@ -12,11 +12,11 @@ return {
             --Config goes here
         },
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPre', 'BufNewFile' },
-        main = 'ibl',
-        opts = {},
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufReadPre', 'BufNewFile' },
+    --     main = 'ibl',
+    --     opts = {},
+    -- },
     -- { 'ThePrimeagen/vim-be-good' },
 }

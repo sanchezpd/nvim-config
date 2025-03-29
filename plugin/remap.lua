@@ -1,4 +1,6 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<leader>pt", ":NvimTreeToggle<CR>")
 
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 vim.keymap.set("n", "<leader>j", "<C-w>j")
@@ -24,4 +26,5 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
 
 vim.keymap.set("n", "<leader>s", ":lua vim.lsp.buf.rename(<C-r><C-w>)<CR>")
+vim.keymap.set("v", "<leader>c", ":Silicon<CR>")
 -- vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")

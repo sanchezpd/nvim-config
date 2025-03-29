@@ -141,7 +141,9 @@ return {
                 vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
                 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
                 vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+                vim.keymap.set('n', '<leader>K', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
             end
+
 
             lsp_zero.extend_lspconfig({
                 sign_text = true,
@@ -153,7 +155,7 @@ return {
                 ensure_installed = {
                     -- 'angularls',
                     'clangd',
-                    'csharp_ls',
+                    -- 'csharp_ls',
                     'cssls',
                     'eslint',
                     'html',
@@ -202,6 +204,19 @@ return {
                     end,
                 }
             })
+
+            local function setup_lsp_diags()
+              vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+                vim.lsp.diagnostic.on_publish_diagnostics,
+                {
+                  virtual_text = false,
+                  signs = true,
+                  update_in_insert = false,
+                  underline = true,
+                }
+              )
+            end
+            setup_lsp_diags()
         end
     },
 
@@ -227,13 +242,13 @@ return {
                             group = augroup,
                             buffer = bufnr,
                         })
-                        vim.api.nvim_create_autocmd("BufWritePre", {
-                            group = augroup,
-                            buffer = bufnr,
-                            callback = function()
-                                vim.lsp.buf.format({ bufnr = bufnr })
-                            end,
-                        })
+                        -- vim.api.nvim_create_autocmd("BufWritePre", {
+                        --     group = augroup,
+                        --     buffer = bufnr,
+                        --     callback = function()
+                        --         vim.lsp.buf.format({ bufnr = bufnr })
+                        --     end,
+                        -- })
                     end
                 end,
             })
