@@ -24,6 +24,7 @@ return {
                 dap = true,
                 dap_ui = true,
                 gitgutter = true,
+                gitsigns = true,
                 harpoon = true,
                 mason = true,
                 telescope = { enabled = true, },
