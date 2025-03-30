@@ -26,7 +26,7 @@ return {
             sections = {
                 lualine_a = { 'mode' },
                 lualine_b = {
-                    -- 'branch',
+                    'branch',
                     'diff',
                     'diagnostics',
                 },
@@ -34,7 +34,7 @@ return {
                     {
                         'filename',
                         file_status = true,
-                        path = 1,
+                        path = 0,
                         symbols = {
                             newfile = '\u{f0394}',
                             modified = '\u{f044}',
