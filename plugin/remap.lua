@@ -1,6 +1,6 @@
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>pv", ":NvimTreeFocus<CR>")
-vim.keymap.set("n", "<leader>pt", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>pv", ":NvimTreeFindFile<CR>")
+vim.keymap.set("n", "<leader>pt", ":NvimTreeFindFileToggle<CR>")
 
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 vim.keymap.set("n", "<leader>j", "<C-w>j")
