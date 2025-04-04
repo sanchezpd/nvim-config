@@ -10,6 +10,10 @@ return {
             view = {
                 width = 40,
             },
+            -- filters = {
+            --     dotfiles = false,
+            --     git_ignored = false,
+            -- },
         })
     end,
 }

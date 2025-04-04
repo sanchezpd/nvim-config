@@ -33,5 +33,5 @@ vim.opt.signcolumn = "yes"
 -- vim.opt.cmdheight = 0
 
 vim.opt.updatetime = 50
-vim.opt.colorcolumn = "89"
-vim.opt.textwidth = 88
+vim.opt.colorcolumn = "121"
+vim.opt.textwidth = 120
