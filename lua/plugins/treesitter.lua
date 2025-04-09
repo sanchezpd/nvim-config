@@ -3,6 +3,7 @@ return {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = 'VeryLazy',
+        dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
@@ -34,4 +35,42 @@ return {
             })
         end,
     },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        lazy = true,
+        config = function()
+            require('nvim-treesitter.configs').setup({
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ['if'] = '@function.inner',
+                            ['af'] = '@function.outer',
+                            ['ip'] = '@parameter.inner',
+                            ['ap'] = '@parameter.outer',
+                            ['ii'] = '@conditional.inner',
+                            ['ai'] = '@conditional.outer',
+                            ['il'] = '@loop.inner',
+                            ['al'] = '@loop.outer',
+                            ['ic'] = '@class.inner',
+                            ['ac'] = '@class.outer',
+                            ['i='] = '@assignment.inner',
+                            ['a='] = '@assignment.outer',
+                            ['l='] = '@assignment.lhs',
+                            ['r='] = '@assignment.rhs',
+                            ['it'] = '@type.inner',
+                        },
+                    },
+                    -- move = {
+                    --     enable = true,
+                    --     set_jumps = true,
+                    --     goto_next_start = {
+                    --         [] = '@function.outer',
+                    --     },
+                    -- },
+                },
+            })
+        end
+    }
 }
