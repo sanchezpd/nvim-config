@@ -1,5 +1,10 @@
 local custom_catppuccin = require('lualine.themes.catppuccin')
 
+local function root_dir_name()
+    local cwd = vim.fn.getcwd()
+    return vim.fn.fnamemodify(cwd, ':t')
+end
+
 return {
     {
         'nvim-lualine/lualine.nvim',
@@ -16,7 +21,7 @@ return {
                 },
                 ignore_focus = {},
                 always_divide_middle = true,
-                globalstatus = false,
+                globalstatus = true,
                 refresh = {
                     statusline = 100,
                     tabline = 100,
@@ -44,7 +49,7 @@ return {
                     }
                 },
                 lualine_x = { 'filetype' },
-                lualine_y = { 'progress' },
+                lualine_y = { root_dir_name, 'progress' },
                 lualine_z = { 'location' }
             },
             inactive_sections = {
