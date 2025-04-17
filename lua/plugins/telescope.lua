@@ -15,7 +15,7 @@ return {
             vim.keymap.set('n', '<leader>pb', builtin.buffers)
             vim.keymap.set('n', '<leader>ps', builtin.live_grep)
             vim.keymap.set('n', '<leader>pw', builtin.grep_string)
-            vim.keymap.set('n', '<leader>t', builtin.treesitter)
+            vim.keymap.set('n', '<leader>ts', builtin.treesitter)
             vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find)
 
             require('telescope').load_extension('undo')
