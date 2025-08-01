@@ -19,6 +19,10 @@ return {
         opts = {
             flavour = "macchiato",
             transparent_background = true,
+            float = {
+                transparent = true,
+                solid = false
+            },
             integrations = {
                 cmp = true,
                 dap = true,
@@ -32,12 +36,12 @@ return {
             },
         },
     },
-    {
-        "Mofiqul/vscode.nvim",
-        name = 'vscode',
-        priority = 1000,
-        opts = {
-            transparent = false,
-        }
-    }
+    -- {
+    --     "Mofiqul/vscode.nvim",
+    --     name = 'vscode',
+    --     priority = 1000,
+    --     opts = {
+    --         transparent = false,
+    --     }
+    -- }
 }
