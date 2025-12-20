@@ -23,7 +23,7 @@ return {
 
             local mason_registry = require('mason-registry')
             local ensure_installed = {
-                'black',
+                -- 'black',
                 'mypy',
             }
 
@@ -112,10 +112,11 @@ return {
     -- LSP
     {
         'neovim/nvim-lspconfig',
+        tag = "v2.4.0",
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lsp', commit = "a8912b88ce488f411177fc8aed358b04dc246d7b" },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim', version = "1.32.0" },
         },
@@ -231,7 +232,7 @@ return {
 
             null_ls.setup({
                 sources = {
-                    null_ls.builtins.formatting.black,
+                    -- null_ls.builtins.formatting.black,
                     null_ls.builtins.diagnostics.mypy.with({
                         extra_args = { '--ignore-missing-imports' },
                     }),
