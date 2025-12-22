@@ -1,99 +1,100 @@
 return {
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        event = 'VeryLazy',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
-        },
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "angular",
-                    "c",
-                    "c_sharp",
-                    "css",
-                    "dockerfile",
-                    "html",
-                    "javascript",
-                    "json",
-                    "lua",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
-                    "query",
-                    "sql",
-                    "typescript",
-                    "vim",
-                    "vimdoc",
-                    "yaml",
-                },
-                sync_install = false,
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                },
-            })
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      local ts = require("nvim-treesitter")
+      local ensure_installed = {
+        "c",
+        "c_sharp",
+        "css",
+        "dockerfile",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "rust",
+        "sql",
+        "typescript",
+        "toml",
+        "yaml",
+      }
+      vim.schedule(function() ts.install(ensure_installed) end)
+
+      local augroup = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
+      local MAX_BYTES = 1024 * 1024
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = augroup,
+        callback = function(args)
+          local buf = args.buf
+
+          local name = vim.api.nvim_buf_get_name(buf)
+          if name ~= "" then
+            local ok, stat = pcall(vim.uv.fs_stat, name)
+            if ok and stat and stat.size > MAX_BYTES then
+              return
+            end
+          end
+
+          pcall(vim.treesitter.start, buf)
         end,
-    },
-    {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        lazy = true,
-        config = function()
-            require('nvim-treesitter.configs').setup({
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            ['if'] = '@function.inner',
-                            ['af'] = '@function.outer',
-                            ['ip'] = '@parameter.inner',
-                            ['ap'] = '@parameter.outer',
-                            ['ii'] = '@conditional.inner',
-                            ['ai'] = '@conditional.outer',
-                            ['il'] = '@loop.inner',
-                            ['al'] = '@loop.outer',
-                            ['ic'] = '@class.inner',
-                            ['ac'] = '@class.outer',
-                            ['i='] = '@assignment.inner',
-                            ['a='] = '@assignment.outer',
-                            ['l='] = '@assignment.lhs',
-                            ['r='] = '@assignment.rhs',
-                            ['it'] = '@type.inner',
-                        },
-                    },
-                    -- move = {
-                    --     enable = true,
-                    --     set_jumps = true,
-                    --     goto_next_start = {
-                    --         [] = '@function.outer',
-                    --     },
-                    -- },
-                },
-            })
-        end
-    }
-    -- {
-    --     'nvim-treesitter/nvim-treesitter-context',
-    --     lazy = true,
-    --     config = function()
-    --         require('treesitter-context').setup{
-    --             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-    --             multiwindow = false, -- Enable multiwindow support.
-    --             max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-    --             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-    --             line_numbers = true,
-    --             multiline_threshold = 20, -- Maximum number of lines to show for a single context
-    --             trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-    --             mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-    --             -- Separator between context and content. Should be a single character string, like '-'.
-    --             -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-    --             separator = nil,
-    --             zindex = 20, -- The Z-index of the context window
-    --             on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-    --         }
-    --     end
-    -- }
+        desc = "Start Treesitter for buffer (if available)",
+      })
+
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    lazy = false,
+    init = function()
+      vim.g.no_plugin_maps = true
+    end,
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = {
+          lookahead = true,
+        },
+      })
+
+      local sel = require("nvim-treesitter-textobjects.select")
+
+      -- Textobject selection maps
+      -- Notes:
+      -- - { "x", "o" } means: visual mode and operator-pending mode
+      local function map(lhs, capture, desc)
+        vim.keymap.set({ "x", "o" }, lhs, function()
+          sel.select_textobject(capture, "textobjects")
+        end, { silent = true, desc = desc })
+      end
+
+      map("if", "@function.inner", "TS textobj: function (inner)")
+      map("af", "@function.outer", "TS textobj: function (outer)")
+
+      map("ip", "@parameter.inner", "TS textobj: parameter (inner)")
+      map("ap", "@parameter.outer", "TS textobj: parameter (outer)")
+
+      map("ii", "@conditional.inner", "TS textobj: conditional (inner)")
+      map("ai", "@conditional.outer", "TS textobj: conditional (outer)")
+
+      map("il", "@loop.inner", "TS textobj: loop (inner)")
+      map("al", "@loop.outer", "TS textobj: loop (outer)")
+
+      map("ic", "@class.inner", "TS textobj: class (inner)")
+      map("ac", "@class.outer", "TS textobj: class (outer)")
+
+      map("i=", "@assignment.inner", "TS textobj: assignment (inner)")
+      map("a=", "@assignment.outer", "TS textobj: assignment (outer)")
+      map("l=", "@assignment.lhs", "TS textobj: assignment LHS")
+      map("r=", "@assignment.rhs", "TS textobj: assignment RHS")
+
+      map("it", "@type.inner", "TS textobj: type (inner)")
+    end,
+  },
 }

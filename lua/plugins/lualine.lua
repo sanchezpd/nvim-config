@@ -1,69 +1,68 @@
-local custom_catppuccin = require('lualine.themes.catppuccin')
+local catppuccin = require("lualine.themes.catppuccin-mocha")
 
 local function root_dir_name()
-    local cwd = vim.fn.getcwd()
-    return vim.fn.fnamemodify(cwd, ':t')
+  local cwd = vim.fn.getcwd()
+  return vim.fn.fnamemodify(cwd, ":t")
 end
 
 return {
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        opts = {
-            options = {
-                icons_enabled = true,
-                theme = custom_catppuccin,
-                component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = '' },
-                disabled_filetypes = {
-                    statusline = {},
-                    winbar = {},
-                },
-                ignore_focus = {},
-                always_divide_middle = true,
-                globalstatus = true,
-                refresh = {
-                    statusline = 100,
-                    tabline = 100,
-                    winbar = 100,
-                }
-            },
-            sections = {
-                lualine_a = { 'mode' },
-                lualine_b = {
-                    'branch',
-                    'diff',
-                    'diagnostics',
-                },
-                lualine_c = {
-                    {
-                        'filename',
-                        file_status = true,
-                        path = 0,
-                        symbols = {
-                            newfile = '\u{f0394}',
-                            modified = '\u{f044}',
-                            readonly = '\u{eda4}',
-                            unnamed = '',
-                        }
-                    }
-                },
-                lualine_x = { 'filetype' },
-                lualine_y = { root_dir_name, 'progress' },
-                lualine_z = { 'location' }
-            },
-            inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = { 'filename' },
-                lualine_x = { 'location' },
-                lualine_y = {},
-                lualine_z = {}
-            },
-            tabline = {},
-            winbar = {},
-            inactive_winbar = {},
-            extensions = {}
-        }
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  event = "UIEnter",
+  opts ={
+    options = {
+      icons_enabled = true,
+      theme = catppuccin,
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
+      disabled_filetypes = {
+        statusline = {},
+        winbar = {},
+      },
+      ignore_focus = {},
+      always_divide_middle = true,
+      globalstatus = true,
+      refresh = {
+        statusline = 100,
+        tabline = 100,
+        winbar = 100,
+      }
     },
+    sections = {
+      lualine_a = { "mode" },
+      lualine_b = {
+        "branch",
+        "diff",
+        "diagnostics",
+      },
+      lualine_c = {
+        {
+          "filename",
+          file_status = true,
+          path = 0,
+          symbols = {
+            newfile = "\u{f0394}",
+            modified = "\u{f044}",
+            readonly = "\u{eda4}",
+            unnamed = "",
+          }
+        }
+      },
+      lualine_x = { "filetype" },
+      lualine_y = { root_dir_name, "progress" },
+      lualine_z = { "location" }
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { "filename" },
+      lualine_x = { "location" },
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {}
+  }
 }

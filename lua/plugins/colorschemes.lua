@@ -1,47 +1,30 @@
 return {
-    -- {
-    --     "neanias/everforest-nvim",
-    --     name = 'everforest',
-    --     lazy = false,
-    --     version = false,
-    --     priority = 1000, -- make sure to load this before all the other start plugins
-    --     opts = {
-    --         background = hard,
-    --         transparent_background_level = 1,
-    --     },
-    -- },
-
-    {
-        "catppuccin/nvim",
-        name = 'catppuccin',
-        lazy = false,
-        priority = 1000,
-        opts = {
-            flavour = "macchiato",
-            transparent_background = true,
-            float = {
-                transparent = true,
-                solid = false
-            },
-            integrations = {
-                cmp = true,
-                dap = true,
-                dap_ui = true,
-                gitgutter = true,
-                gitsigns = true,
-                harpoon = true,
-                mason = true,
-                telescope = { enabled = true, },
-                treesitter = true,
-            },
-        },
+  "catppuccin/nvim",
+  name = "catppuccin",
+  lazy = false,
+  priority = 1000,
+  init = function()
+    if vim.g.colors_name ~= "catppuccin" then
+      vim.cmd.colorscheme("catppuccin")
+    end
+  end,
+  opts = {
+    flavour = "macchiato",
+    transparent_background = true,
+    float = {
+      transparent = true,
+      solid = false
     },
-    -- {
-    --     "Mofiqul/vscode.nvim",
-    --     name = 'vscode',
-    --     priority = 1000,
-    --     opts = {
-    --         transparent = false,
-    --     }
-    -- }
+    integrations = {
+      cmp = true,
+      gitsigns = { enabled = true, transparent = true },
+      harpoon = true,
+      mason = true,
+      nvim_surround = true,
+      nvimtree = true,
+      telescope = { enabled = true },
+      treesitter = true,
+    },
+
+  },
 }
