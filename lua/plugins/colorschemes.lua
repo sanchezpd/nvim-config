@@ -16,6 +16,7 @@ return {
       solid = false
     },
     integrations = {
+      alpha = true,
       cmp = true,
       gitsigns = { enabled = true, transparent = true },
       harpoon = true,
