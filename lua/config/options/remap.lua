@@ -1,6 +1,7 @@
 -- File explorer
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { silent = true })
 
+-- Native comment
 vim.keymap.set("n", "<leader>}", "gcc", { remap = true, silent = true, desc = "Comment line" })
 vim.keymap.set("x", "<leader>}", "gc", { remap = true, silent = true, desc = "Comment selection" })
 

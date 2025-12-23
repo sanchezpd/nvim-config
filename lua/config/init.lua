@@ -1,4 +1,5 @@
+require("config.options.global")
+require("config.options.set")
+require("config.options.remap")
 require("config.lazy")
-require("config.remap")
-require("config.set")
 require("config.lsp").setup()
