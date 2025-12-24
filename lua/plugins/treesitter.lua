@@ -8,7 +8,6 @@ return {
       local ensure_installed = {
         "bash",
         "c",
-        "checkhealth",
         "c_sharp",
         "css",
         "diff",
