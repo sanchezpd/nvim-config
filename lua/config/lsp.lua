@@ -49,7 +49,7 @@ local function setup_keymaps()
       vim.keymap.set({ "n", "x" }, "<leader>f", function()
         vim.lsp.buf.format({ async = true })
       end, opts)
-      vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+      vim.keymap.set("n", "<leader>r", vim.lsp.buf.code_action, opts)
 
       vim.keymap.set("n", "<leader>K", vim.diagnostic.open_float, opts)
     end,
