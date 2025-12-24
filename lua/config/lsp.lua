@@ -71,6 +71,7 @@ function M.setup()
     "docker_compose_language_service",
     "dockerls",
     "jsonls",
+    "ltex",
     "lua_ls",
     "pyright",
     "ruff",

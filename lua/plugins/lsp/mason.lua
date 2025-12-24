@@ -13,6 +13,7 @@ return {
       "dockerfile-language-server",
       "json-lsp",
       "lua-language-server",
+      "ltex-ls",
       "pyright",
       "ruff",
       "taplo",
