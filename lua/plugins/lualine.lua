@@ -1,10 +1,5 @@
 local catppuccin = require("lualine.themes.catppuccin-mocha")
 
-local function root_dir_name()
-  local cwd = vim.fn.getcwd()
-  return vim.fn.fnamemodify(cwd, ":t")
-end
-
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -49,7 +44,7 @@ return {
         }
       },
       lualine_x = { "filetype" },
-      lualine_y = { root_dir_name, "progress" },
+      lualine_y = { "progress" },
       lualine_z = { "location" }
     },
     inactive_sections = {
