@@ -1,8 +1,8 @@
 local neovim = {
-  [[                                                                       ]],
-  [[                                                                       ]],
-  [[                                                                       ]],
-  [[                                                                       ]],
+  -- [[                                                                       ]],
+  -- [[                                                                       ]],
+  -- [[                                                                       ]],
+  -- [[                                                                       ]],
   [[                                                                       ]],
   [[                                                                       ]],
   [[                                                                       ]],
@@ -80,6 +80,19 @@ return {
         }
         dashboard.section.footer.opts.hl = "Identifier"
         pcall(vim.cmd.AlphaRedraw)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "AlphaReady",
+      callback = function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        vim.keymap.set("n", "q", "<cmd>quit<CR>", {
+          buffer = bufnr,
+          silent = true,
+          nowait = true,
+          desc = "Quit",
+        })
       end,
     })
   end,
