@@ -42,6 +42,8 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "121"
 vim.opt.textwidth = 120
 
+vim.opt.grepprg="rg --vimgrep --smart-case -P"
+
 vim.filetype.add({
   filename = {
     ["docker-compose.yml"] = "yaml.docker-compose",

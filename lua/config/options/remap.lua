@@ -34,3 +34,14 @@ vim.keymap.set({ "n", "x" }, "<leader>d", [["_d]], { silent = true, desc = "Dele
 
 -- Rename in file without LSP
 -- vim.keymap.set("n", "<leader>s", "<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
+-- Repeat ], [ movements
+vim.api.nvim_create_user_command("BindBracketsToComma", function()
+  vim.notify("Press selector for ]x/[x (d/q/c/f/])")
+  local x = vim.fn.getcharstr()
+  if x == nil or x == "" then return end
+  vim.keymap.set("n", ",", "]" .. x, { silent = true, remap = true })
+  vim.keymap.set("n", ";", "[" .. x, { silent = true, remap = true })
+end, {})
+
+vim.keymap.set("n", "<leader>]", "<cmd>BindBracketsToComma<CR>", { silent = true })
