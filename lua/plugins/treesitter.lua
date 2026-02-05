@@ -16,6 +16,7 @@ return {
         "gitignore",
         "git_rebase",
         "go",
+        "gomod",
         "helm",
         "html",
         "ini",

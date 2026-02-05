@@ -70,6 +70,8 @@ function M.setup()
     "buf_ls",
     "docker_compose_language_service",
     "dockerls",
+    "golangci_lint_ls",
+    "gopls",
     "jsonls",
     "ltex",
     "lua_ls",

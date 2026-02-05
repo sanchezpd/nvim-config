@@ -11,6 +11,8 @@ return {
       "buf",
       "docker-compose-language-service",
       "dockerfile-language-server",
+      "golangci-lint",
+      "gopls",
       "json-lsp",
       "lua-language-server",
       "ltex-ls",
