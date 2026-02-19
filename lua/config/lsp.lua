@@ -68,6 +68,7 @@ function M.setup()
   vim.lsp.enable({
     "bashls",
     "buf_ls",
+    "csharp_ls",
     "docker_compose_language_service",
     "dockerls",
     "golangci_lint_ls",

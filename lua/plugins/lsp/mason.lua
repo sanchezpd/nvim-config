@@ -9,6 +9,8 @@ return {
     local ensure_installed = {
       "bash-language-server",
       "buf",
+      "csharp-language-server",
+      "csharpier",
       "docker-compose-language-service",
       "dockerfile-language-server",
       "golangci-lint",
