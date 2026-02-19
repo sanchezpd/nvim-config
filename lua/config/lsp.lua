@@ -73,7 +73,6 @@ function M.setup()
     "golangci_lint_ls",
     "gopls",
     "jsonls",
-    "ltex",
     "lua_ls",
     "pyright",
     "ruff",
