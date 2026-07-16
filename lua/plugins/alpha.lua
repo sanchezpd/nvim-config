@@ -58,6 +58,7 @@ return {
       dashboard.button("s", "   Find word", "<cmd>Telescope live_grep<CR>"),
       dashboard.button("o", "   Last cursor position", "<cmd>normal! `0<CR>"),
       dashboard.button("t", "   Nvim-Tree", "<cmd>NvimTreeToggle<CR>"),
+      dashboard.button("d", "   Code-Diff", "<cmd>CodeDiff<CR>"),
       { type = "padding", val = 1 },
       dashboard.button("l", "󰒲   Lazy", "<cmd>Lazy<CR>"),
       dashboard.button("u", "󰂖   Update plugins", "<cmd>lua require('lazy').sync()<CR>"),
