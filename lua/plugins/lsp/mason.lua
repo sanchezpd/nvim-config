@@ -1,6 +1,6 @@
 return {
   "mason-org/mason.nvim",
-  event = "VeryLazy",
+  lazy = false, -- Add Mason's bin directory to PATH before LSP startup.
   config = function()
     require("mason").setup({})
 
